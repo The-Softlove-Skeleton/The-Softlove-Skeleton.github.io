@@ -1,0 +1,28 @@
+body {
+    background-color: rgb(30, 34, 41);
+    color: rgb(255, 238, 252);
+    input {
+        background-color: rgb(30, 34, 41);
+        border-style: solid;
+        border-width: 0;
+        color: rgb(255, 238, 252);
+    }
+    input:focus{
+        outline: none
+    }
+
+}
+
+.horizontal-center {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.vertical-center{
+    padding-top: 8rem;
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+
+}
