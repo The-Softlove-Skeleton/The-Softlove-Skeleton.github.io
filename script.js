@@ -1,6 +1,5 @@
 window.onload = function() {
     var cursorInput = document.getElementById("cursor-input")
-    cursorInput.focus()
     cursorInput.addEventListener("keydown", function(e){
         if(e.code === "Enter"){
             inputSubmitted(cursorInput.value)

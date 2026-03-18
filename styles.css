@@ -1,6 +1,7 @@
 body {
-    background-color: rgb(30, 34, 41);
     color: rgb(255, 238, 252);
+    background: rgb(0,0, 255);
+    padding-top: 2rem;
     input {
         background-color: rgb(30, 34, 41);
         border-style: solid;
@@ -17,12 +18,35 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: row;
+    width: 100vw;
 }
 
 .vertical-center{
-    padding-top: 8rem;
     display:flex;
     justify-content: center;
     flex-direction: column;
+    height: 75vh;
+    width: 100vw;
+    align-items: center;
+    margin-left: 32rem;
+    padding-left: 2rem;
+    margin-right: 32rem;
+    padding-right: 2rem;
+    background-color: rgb(30, 34, 41);
+    padding-bottom: 1rem
+}
 
+.output-area{
+    align-items: center;
+    height: 80vh;
+}
+
+.cursor-input-container {
+    width: 80vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.input-prompt {
+padding-right :2rem;
 }
