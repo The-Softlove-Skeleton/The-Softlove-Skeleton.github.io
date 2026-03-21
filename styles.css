@@ -27,7 +27,7 @@ body {
     display: flex;
     justify-content: center;
     flex-direction: row;
-    width: 100vw;
+    width: 100%;
 }
 
 .vertical-center{
@@ -35,7 +35,7 @@ body {
     justify-content: center;
     flex-direction: column;
     height: 75vh;
-    width: 100vw;
+    width: 100%;
     align-items: center;
     margin-left: 32rem;
     padding-left: 2rem;
@@ -65,6 +65,6 @@ body {
 }
 
 .cursor-input {
-    width: 100vw;
+    width: 100%;
     text-wrap: wrap;
 }
