@@ -49,6 +49,8 @@ body {
     align-items: center;
     height: 80vh;
     align-self: flex-start;
+    letter-spacing : -1px;
+    white-space : pre-wrap;
 }
 
 .cursor-input-container {
