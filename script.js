@@ -73,7 +73,7 @@ window.onload = function() {
                                                         .-        -.
                                                        /            \\
                                                       |              |
-    Logged in as ████████                          |,  .-.  .-.  ,|
+   Logged in as ████████                           |,  .-.  .-.  ,|
                                                       | )(__/  \\__)( |
                                                       |/     /\\     \\|
    Display all available commands using 'help'        (_     ^^     _)

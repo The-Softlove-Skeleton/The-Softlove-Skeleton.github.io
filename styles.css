@@ -34,8 +34,9 @@ body {
     display:flex;
     justify-content: center;
     flex-direction: column;
-    height: 75vh;
-    width: 100%;
+    min-height: 75vh;
+    width: fit-content;
+    max-width: 80%;
     align-items: center;
     margin-left: 32rem;
     padding-left: 2rem;
@@ -47,7 +48,6 @@ body {
 
 .output-area{
     align-items: center;
-    height: 80vh;
     align-self: flex-start;
     letter-spacing : -1px;
     white-space : pre-wrap;
