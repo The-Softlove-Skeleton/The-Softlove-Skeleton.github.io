@@ -69,19 +69,20 @@ window.onload = function() {
 
     var outputArea = document.getElementById("output-area")
     outputArea.innerHTML = `
-                                                           ______
-                                                        .-        -.
-                                                       /            \\
-                                                      |              |
-   Logged in as ████████                           |,  .-.  .-.  ,|
-                                                      | )(__/  \\__)( |
-                                                      |/     /\\     \\|
-   Display all available commands using 'help'        (_     ^^     _)
-                                                       \\__|IIIIII|__/
-                                                        | \\IIIIII/ |
-                                                         \\        /
-                                                          --------
-    `
+
+     ______           ______________________________________________
+  .-        -.      /                                               \\
+ /            \\    |   Logged in as ███████                       |
+|              |   |                                                 |
+|,  .-.  .-.  ,|   |                                                 |
+| )(__/  \\__)( |  |    Display all available commands using 'help'   |
+|/     /\\     \\|  |        __________________________________________/
+(_     ^^     _)  |     /
+ \\__|IIIIII|__/   |    /
+  | \\IIIIII/ |   <___/
+   \\        /
+    --------
+     `
 }
 
 function setCommandHistoryEntry(cursorInput, code){
