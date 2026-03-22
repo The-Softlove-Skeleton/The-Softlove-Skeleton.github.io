@@ -54,10 +54,12 @@ body {
 }
 
 .cursor-input-container {
-    width: 80vw;
+    width: 100%;
+    min-width: 80vw;
     display: flex;
     flex-direction: row;
     flex: grow;
+    margin-top: auto;
 }
 
 .input-prompt {
