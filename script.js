@@ -4,18 +4,18 @@ class Directory {
     subDirectories = [];
     containedFiles = [];
 
-    static asRoot(name, subDirectories, containedFiles){
-           return new Directory(name, undefined, subDirectories, containedFiles);
+    static asRoot(name, subDirectories, containedFiles) {
+        return new Directory(name, undefined, subDirectories, containedFiles);
     }
 
-    constructor(name, parent, subDirectories, containedFiles){
+    constructor(name, parent, subDirectories, containedFiles) {
         this.name = name;
         this.parent = parent;
         this.subDirectories = subDirectories;
         this.containedFiles = containedFiles;
     }
 
-    addSubdirectory(subdirectory){
+    addSubdirectory(subdirectory) {
         this.subDirectories.push(subdirectory);
     }
 
@@ -25,15 +25,16 @@ class File {
     name = "";
     content = "";
     type = "";
+
     constructor(name, content, type) {
         this.name = name;
         this.content = content;
         this.type = type;
-   }
+    }
 
-   toString() {
-        return this.name+this.type
-   }
+    toString() {
+        return this.name + this.type
+    }
 }
 
 const commandHistory = [];
@@ -47,27 +48,27 @@ docsDirectory.addSubdirectory(itemDirectory);
 docsDirectory.addSubdirectory(entityDirectory);
 currentDirectory.addSubdirectory(docsDirectory);
 
-window.onload = function() {
-    var cursorInput = document.getElementById("cursor-input")
-    cursorInput.addEventListener("keydown", function(e){
-        if(e.code === "Enter"){
-            var input = cursorInput.value;
+window.onload = function () {
+    const cursorInput = document.getElementById("cursor-input");
+    cursorInput.addEventListener("keydown", function (e) {
+        if (e.code === "Enter") {
+            const input = cursorInput.value;
             inputSubmitted(input);
             cursorInput.value = "";
             commandHistory.push(input);
             resetCommandHistorySelection();
-        }else if(e.code === "ArrowUp"){
+        } else if (e.code === "ArrowUp") {
             setCommandHistoryEntry(cursorInput, e.code);
-        }else if(e.code === "ArrowDown"){
+        } else if (e.code === "ArrowDown") {
             setCommandHistoryEntry(cursorInput, e.code);
         }
     })
 
-    cursorInput.onblur = function(){
+    cursorInput.onblur = function () {
         cursorInput.focus()
     }
 
-    var outputArea = document.getElementById("output-area")
+    const outputArea = document.getElementById("output-area");
     outputArea.innerHTML = `
 
      ______           ______________________________________________
@@ -85,17 +86,17 @@ window.onload = function() {
      `
 }
 
-function setCommandHistoryEntry(cursorInput, code){
-    var selectedCommand = commandHistory[historySelection];
-    if(selectedCommand){
+function setCommandHistoryEntry(cursorInput, code) {
+    const selectedCommand = commandHistory[historySelection];
+    if (selectedCommand) {
         cursorInput.value = selectedCommand;
-        if(!historyFirstUse){
-            if( code === "ArrowUp"){
+        if (!historyFirstUse) {
+            if (code === "ArrowUp") {
                 historySelection--;
-                historySelection= Math.max(historySelection, 0);
-            }else{
+                historySelection = Math.max(historySelection, 0);
+            } else {
                 historySelection++;
-                historySelection = Math.min(historySelection, commandHistory.length-1);
+                historySelection = Math.min(historySelection, commandHistory.length - 1);
             }
         }
     }
@@ -103,18 +104,18 @@ function setCommandHistoryEntry(cursorInput, code){
 }
 
 
-function resetCommandHistorySelection(){
-    historySelection = commandHistory.length -1;
+function resetCommandHistorySelection() {
+    historySelection = commandHistory.length - 1;
     historyFirstUse = true;
 }
 
-function inputSubmitted(input){
-    var outputArea = document.getElementById("output-area")
+function inputSubmitted(input) {
+    const outputArea = document.getElementById("output-area");
     outputArea.innerHTML = ""
-     if(input === "ls"){
-        var directoryOutput ="";
+    if (input === "ls") {
+        let directoryOutput = "";
         for (let subdirectory of currentDirectory.subDirectories) {
-            directoryOutput +=  "<u>" + subdirectory.name + "</u>";
+            directoryOutput += "<u>" + subdirectory.name + "</u>";
             directoryOutput += "<br>";
         }
         for (let file of currentDirectory.containedFiles) {
@@ -122,54 +123,55 @@ function inputSubmitted(input){
             directoryOutput += "<br>";
         }
         outputArea.innerHTML = directoryOutput;
-     }else if(input.toLowerCase().startsWith("cd")){
-        var splitInput = input.split(" ").filter(str => str);
-        var requestedDirectory = splitInput[1];
-        if(requestedDirectory === ".."){
+    } else if (input.toLowerCase().startsWith("cd")) {
+        const splitInput = input.split(" ").filter(str => str);
+        const requestedDirectory = splitInput[1];
+        if (requestedDirectory === "..") {
             currentDirectory = currentDirectory.parent ? currentDirectory.parent : currentDirectory;
-        }else{
-            var directoryParts = requestedDirectory.split("\\");
-            var directoriesFound = 0
-            var foundDirectory = currentDirectory
-            for(let directoryPart of directoryParts){
-                for(let directory of foundDirectory.subDirectories){
-                    if(directory.name === directoryPart){
+        } else {
+            const directoryParts = requestedDirectory.split("\\");
+            let directoriesFound = 0
+            let foundDirectory = currentDirectory
+            for (let directoryPart of directoryParts) {
+                for (let directory of foundDirectory.subDirectories) {
+                    if (directory.name === directoryPart) {
                         directoriesFound++;
                         foundDirectory = directory
                         break;
                     }
                 }
             }
-            if(directoriesFound === directoryParts.length){
+            if (directoriesFound === directoryParts.length) {
                 currentDirectory = foundDirectory
                 return;
             }
             // No Directory found
-            outputArea.innerHTML = "Not a valid directory "+ "'"+requestedDirectory+"'"
+            outputArea.innerHTML = "Not a valid directory " + "'" + requestedDirectory + "'"
         }
-     } else if(input.toLowerCase().startsWith("cat")){
-        var filePath = input.split(" ").filter(str => str)[1];
-        var filePathParts = filePath.split("\\").slice(0, -1).filter(str => str);
-        var fileName = filePath.split("\\").at(-1);
-        var directoriesFound = 0;
-        var foundDirectory = currentDirectory;
-        for(let filePathPart of filePathParts){
-            for(let directory of foundDirectory.subDirectories){
-                if(directory.name == filePathPart)
+    } else if (input.toLowerCase().startsWith("cat")) {
+        const filePath = input.split(" ").filter(str => str)[1];
+        const filePathParts = filePath.split("\\").slice(0, -1).filter(str => str);
+        const fileName = filePath.split("\\").at(-1);
+        let directoriesFound = 0;
+        let foundDirectory = currentDirectory;
+        for (let filePathPart of filePathParts) {
+            for (let directory of foundDirectory.subDirectories) {
+                if (directory.name === filePathPart){
                     foundDirectory = directory;
-                    directoriesFound++;
+                    directoriesFound++;L
                     break;
+                }
             }
         }
-        var foundFile = foundDirectory.containedFiles.find(file => file.toString() === fileName);
-        if(directoriesFound == filePathParts.length && foundFile){
+        const foundFile = foundDirectory.containedFiles.find(file => file.toString() === fileName);
+        if (directoriesFound === filePathParts.length && foundFile) {
             outputArea.innerHTML = foundFile.content;
             return;
         }
 
         // No File found
-        outputArea.innerHTML = "Not a valid file "+ "'"+filePath+"'"
-     }else if(input === "help"){
+        outputArea.innerHTML = "Not a valid file " + "'" + filePath + "'"
+    } else if (input === "help") {
         outputArea.innerHTML += "<pre>";
         outputArea.innerHTML += "The following commands are available: <br>";
         outputArea.innerHTML += "help                   - Displays all command <br>";
@@ -178,7 +180,7 @@ function inputSubmitted(input){
         outputArea.innerHTML += "cat [file name]        - Displays the content of the file selected by file name <br>";
         outputArea.innerHTML += "</pre>";
 
-     }else{
-        outputArea.innerHTML = "Invalid input command: "+ "'"+input+"'"
-     }
+    } else {
+        outputArea.innerHTML = "Invalid input command: " + "'" + input + "'"
+    }
 }
